@@ -5,6 +5,9 @@ public class DialogueController : Singleton<DialogueController>
     private string[] exampleDialogue =
     {
         "Hello, world!",
+        "The sun is shining brightly and the birds are chirping.",
+        "Smog covers the sun and the trees are dying.",
+        "The world is ending.",
         "Goodbye, world."
     };
     private string[] openDialogue;
@@ -37,8 +40,13 @@ public class DialogueController : Singleton<DialogueController>
 
     private void AdvanceDialogue(int steps)
     {
-        currentLine = currentLine + steps;
-        TextController.Instance.SetText(openDialogue[currentLine]);
+        int newLineIndex = currentLine + steps;
+        
+        if (newLineIndex >= 0 && newLineIndex < openDialogue.Length)
+        {
+            currentLine = newLineIndex;
+            TextController.Instance.SetText(openDialogue[currentLine]);
+        }
     }
 
     private void StepForward()
