@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputController : Singleton<InputController>
 {
@@ -7,15 +8,20 @@ public class InputController : Singleton<InputController>
     private InputAction stepForwardAction;
     private InputAction stepBackwardAction;
     private InputAction repeatLineAction;
+    [SerializeField] private Button stepForwardButton;
+    [SerializeField] private Button stepBackwardButton;
+    [SerializeField] private Button repeatLineButton;
 
     private void Start()
     {
         EnableInputs();
+        SetUpButtons();
     }
 
     private void OnDestroy()
     {
         DisableInputs();
+        TearDownButtons();
     }
 
     private void EnableInputs()
@@ -43,6 +49,42 @@ public class InputController : Singleton<InputController>
         stepForwardAction.Disable();
         stepBackwardAction.Disable();
         repeatLineAction.Disable();
+    }
+
+    private void SetUpButtons()
+    {
+        if (stepForwardButton)
+        {
+            stepForwardButton.onClick.AddListener(DialogueController.Instance.StepForward);
+        }
+
+        if (stepBackwardButton)
+        {
+            stepBackwardButton.onClick.AddListener(DialogueController.Instance.StepBackward);
+        }
+
+        if (repeatLineButton)
+        {
+            repeatLineButton.onClick.AddListener(DialogueController.Instance.RepeatLine);
+        }
+    }
+
+    private void TearDownButtons()
+    {
+        if (stepForwardButton)
+        {
+            stepForwardButton.onClick.RemoveListener(DialogueController.Instance.StepForward);
+        }
+
+        if (stepBackwardButton)
+        {
+            stepBackwardButton.onClick.RemoveListener(DialogueController.Instance.StepBackward);
+        }
+
+        if (repeatLineButton)
+        {
+            repeatLineButton.onClick.RemoveListener(DialogueController.Instance.RepeatLine);
+        }
     }
 
     private void OnStepForward(InputAction.CallbackContext context)

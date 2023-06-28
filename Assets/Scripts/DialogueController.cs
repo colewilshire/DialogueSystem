@@ -44,6 +44,7 @@ public class DialogueController : Singleton<DialogueController>
         
         if (newLineIndex >= 0 && newLineIndex < openDialogue.Length)
         {
+            Debug.Log(steps);
             currentLine = newLineIndex;
             TextController.Instance.SetText(openDialogue[currentLine]);
         }
