@@ -9,4 +9,5 @@ public class DialogueLine : ScriptableObject
     public DialogueResponse[] responses;
     public DialogueLine previousLine;
     public DialogueLine nextLine;
+    public string[] setFlags;
 }

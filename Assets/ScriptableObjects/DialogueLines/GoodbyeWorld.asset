@@ -16,5 +16,8 @@ MonoBehaviour:
   dialogueText: Goodbye, world.
   voiceLine: {fileID: 0}
   responses: []
-  nextLine: {fileID: 0}
   previousLine: {fileID: 11400000, guid: 6e8e22f4079dba343aff54cc9fb6410e, type: 2}
+  nextLine: {fileID: 0}
+  setFlags:
+  - Dog
+  - Cat

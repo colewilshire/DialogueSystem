@@ -10,14 +10,26 @@ public class DialogueController : Singleton<DialogueController>
         PlayDialogue(defaultLine);
     }
 
-    public void PlayDialogue(DialogueLine dialogueLine)
+    public void PlayDialogue(DialogueLine dialogueLine, bool isRewinding = false)
     {
+        if (isRewinding && currentLine.setFlags.Length > 0)
+        {
+            FlagController.Instance.ToggleFlags(currentLine.setFlags, !isRewinding);
+        }
+        
         currentLine = dialogueLine;
         TextController.Instance.SetText(currentLine.dialogueText);
         ResponseController.Instance.DestroyResponses();
 
-        if (!(currentLine.responses.Length > 0)) return;
-        ResponseController.Instance.ShowResponses(currentLine.responses);
+        if (currentLine.responses.Length > 0)
+        {
+            ResponseController.Instance.ShowResponses(currentLine.responses);
+        }
+
+        if (!isRewinding && currentLine.setFlags.Length > 0)
+        {
+            FlagController.Instance.ToggleFlags(currentLine.setFlags, !isRewinding);
+        }
     }
 
     public void StepForward()
@@ -29,7 +41,7 @@ public class DialogueController : Singleton<DialogueController>
     public void StepBackward()
     {
         if (!currentLine.previousLine) return;
-        PlayDialogue(currentLine.previousLine);
+        PlayDialogue(currentLine.previousLine, true);
     }
 
     public void RepeatLine()

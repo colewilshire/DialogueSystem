@@ -8,5 +8,4 @@ public class DialogueResponse : ScriptableObject
     public DialogueLine previousLine;
     public DialogueLine nextLine;
     public string[] checkFlags;
-    public string[] setFlags;
 }
