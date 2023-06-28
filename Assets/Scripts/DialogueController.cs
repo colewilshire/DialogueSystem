@@ -2,66 +2,39 @@ using UnityEngine;
 
 public class DialogueController : Singleton<DialogueController>
 {
-    private string[] exampleDialogue =
-    {
-        "Hello, world!",
-        "The sun is shining brightly and the birds are chirping.",
-        "Smog covers the sun and the trees are dying.",
-        "The world is ending.",
-        "Goodbye, world."
-    };
-    private string[] openDialogue;
-    private int currentLine = 0;
+    private DialogueLine currentLine;
+    [SerializeField] private DialogueLine defaultLine;
 
     private void Start()
     {
-        BeginDialogue(exampleDialogue);
+        PlayDialogue(defaultLine);
     }
 
-    private void LoadDialogue()//string[] dialogue)
+    public void PlayDialogue(DialogueLine dialogueLine)
     {
-        //Speaking character [enum? string?]
-        //Emotion/Appearance [enum? string?]
-        //Line [string]
-        //Audio clip
-        //Stage left, right, center
-        //Fade in/out type
+        currentLine = dialogueLine;
+        TextController.Instance.SetText(currentLine.dialogueText);
+        ResponseController.Instance.DestroyResponses();
 
-        //Dog: <Left> [Angry] "Ruff ruff ruff!"
-    }
-
-    private void BeginDialogue(string[] dialogue)
-    {
-        openDialogue = dialogue;
-        currentLine = 0;
-    
-        RepeatLine();
-    }
-
-    private void AdvanceDialogue(int steps)
-    {
-        int newLineIndex = currentLine + steps;
-        
-        if (newLineIndex >= 0 && newLineIndex < openDialogue.Length)
-        {
-            Debug.Log(steps);
-            currentLine = newLineIndex;
-            TextController.Instance.SetText(openDialogue[currentLine]);
-        }
+        if (!(currentLine.responses.Length > 0)) return;
+        ResponseController.Instance.ShowResponses(currentLine.responses);
     }
 
     public void StepForward()
     {
-        AdvanceDialogue(1);
+        if (!currentLine.nextLine) return;
+        PlayDialogue(currentLine.nextLine);
     }
 
     public void StepBackward()
     {
-        AdvanceDialogue(-1);
+        if (!currentLine.previousLine) return;
+        PlayDialogue(currentLine.previousLine);
     }
 
     public void RepeatLine()
     {
-        AdvanceDialogue(0);
+        if (!currentLine) return;
+        PlayDialogue(currentLine);
     }
 }

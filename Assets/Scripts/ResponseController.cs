@@ -1,46 +1,34 @@
 using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ResponseController : Singleton<ResponseController>
 {
     [SerializeField] private GameObject buttonPrefab;
-    private string[] testResponses =
-    {
-        "string1",
-        "string2",
-        "string3",
-        "string4",
-        "string5",
-        "string6",
-        "string7",
-        "string8",
-        "string9"
-    };
+    private List<GameObject> activeButtons = new List<GameObject>();
 
-    void Start()
+    public void ShowResponses(DialogueResponse[] responses)
     {
-        GenerateResponses(testResponses);
-    }
-
-    private void GenerateResponses(string[] responses)
-    {
-        foreach (string response in responses)
+        foreach (DialogueResponse response in responses)
         {
             GameObject button = Instantiate(buttonPrefab, transform);
-            TextMeshProUGUI textMesh = button.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
 
-            if (textMesh != null)
-            {
-                textMesh.text = response;
-            }
-
-            button.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(response));
+            buttonText.text = response.responseText;
+            activeButtons.Add(button);
+            button.GetComponent<ResponseButton>().SetLineToPlay(response.nextLine);
         }
     }
 
-    void OnButtonClick(string label)
+    public void DestroyResponses()
     {
-        Debug.Log($"Button with label '{label}' was clicked");
+        if (!(activeButtons.Count > 0)) return;
+
+        foreach (GameObject button in activeButtons)
+        {
+            Destroy(button);
+        }
+
+        activeButtons.Clear();
     }
 }
