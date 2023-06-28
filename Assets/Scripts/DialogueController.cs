@@ -18,16 +18,16 @@ public class DialogueController : Singleton<DialogueController>
         BeginDialogue(exampleDialogue);
     }
 
-    private void Update()
+    private void LoadDialogue()//string[] dialogue)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            StepForward();
-        }
-        else if(Input.GetMouseButtonDown(1))
-        {
-            StepBackward();
-        }
+        //Speaking character [enum? string?]
+        //Emotion/Appearance [enum? string?]
+        //Line [string]
+        //Audio clip
+        //Stage left, right, center
+        //Fade in/out type
+
+        //Dog: <Left> [Angry] "Ruff ruff ruff!"
     }
 
     private void BeginDialogue(string[] dialogue)
@@ -49,17 +49,17 @@ public class DialogueController : Singleton<DialogueController>
         }
     }
 
-    private void StepForward()
+    public void StepForward()
     {
         AdvanceDialogue(1);
     }
 
-    private void StepBackward()
+    public void StepBackward()
     {
         AdvanceDialogue(-1);
     }
 
-    private void RepeatLine()
+    public void RepeatLine()
     {
         AdvanceDialogue(0);
     }
