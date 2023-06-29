@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class FlagController : Singleton<FlagController>
 {
@@ -23,7 +22,6 @@ public class FlagController : Singleton<FlagController>
         foreach (string flagName in flagNames)
         {
             flags[flagName] = state;
-            Debug.Log(flagNames + "" + flags[flagName]);
         }
     }
 }

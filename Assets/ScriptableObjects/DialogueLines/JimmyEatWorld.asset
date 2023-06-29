@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   dialogueText: Jimmehh!
-  voiceLine: {fileID: 0}
+  voiceLine: {fileID: 8300000, guid: 6c6109b770dacda4cad45cab548ca908, type: 3}
   responses:
   - {fileID: 11400000, guid: 58059dfa38f832c41a7d5bd34343bd03, type: 2}
   - {fileID: 11400000, guid: e524b15ee77b5a647ba25a5c6206f9d0, type: 2}
   previousLine: {fileID: 11400000, guid: 0e8a8f22294fda241a04113de2307144, type: 2}
   nextLine: {fileID: 0}
+  setFlags:
+  - ca
+  - d

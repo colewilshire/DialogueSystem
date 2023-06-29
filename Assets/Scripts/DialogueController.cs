@@ -4,6 +4,7 @@ public class DialogueController : Singleton<DialogueController>
 {
     private DialogueLine currentLine;
     [SerializeField] private DialogueLine defaultLine;
+    [SerializeField] private bool isVoiceActingEnabled = true;
 
     private void Start()
     {
@@ -20,6 +21,11 @@ public class DialogueController : Singleton<DialogueController>
         currentLine = dialogueLine;
         TextController.Instance.SetText(currentLine.dialogueText);
         ResponseController.Instance.DestroyResponses();
+
+        if (isVoiceActingEnabled && currentLine.voiceLine)
+        {
+            AudioController.Instance.PlaySound(currentLine.voiceLine);
+        }
 
         if (currentLine.responses.Length > 0)
         {

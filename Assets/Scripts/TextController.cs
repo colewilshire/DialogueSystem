@@ -5,6 +5,7 @@ using UnityEngine;
 public class TextController : Singleton<TextController>
 {
     [SerializeField] private float textDelay = .1f;
+    [SerializeField] private bool isTextSoundEnabled = true;
     private TextMeshProUGUI textBox;
     private AudioSource audioSource;
     private string currentText = "";
@@ -31,7 +32,11 @@ public class TextController : Singleton<TextController>
             for (int i = 0; i < currentText.Length; ++i)
             {
                 textBox.text = currentText.Substring(0, i);
-                audioSource.PlayOneShot(audioSource.clip);
+
+                if (isTextSoundEnabled)
+                {
+                    audioSource.PlayOneShot(audioSource.clip);
+                }
 
                 yield return new WaitForSeconds(textDelay);
             }
