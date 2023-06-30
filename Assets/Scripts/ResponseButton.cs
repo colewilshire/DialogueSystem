@@ -21,7 +21,7 @@ public class ResponseButton : MonoBehaviour
     private void PlayNextLine()
     {
         if (!nextLine) return;
-        DialogueController.Instance.PlayDialogue(nextLine);
+        DialogueController.Instance.JumpToLine(nextLine);
     }
 
     public void SetLineToPlay(DialogueLine dialogueLine)

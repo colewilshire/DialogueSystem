@@ -1,58 +1,67 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueController : Singleton<DialogueController>
 {
-    private DialogueLine currentLine;
     [SerializeField] private DialogueLine defaultLine;
-    [SerializeField] private bool isVoiceActingEnabled = true;
+    private List<DialogueLine> dialoguePath;
 
     private void Start()
     {
-        PlayDialogue(defaultLine);
+        StartDialogue();
     }
 
-    public void PlayDialogue(DialogueLine dialogueLine, bool isRewinding = false)
+    private void StartDialogue()
     {
-        if (isRewinding && currentLine.setFlags.Length > 0)
-        {
-            FlagController.Instance.ToggleFlags(currentLine.setFlags, !isRewinding);
-        }
-        
-        currentLine = dialogueLine;
+        dialoguePath = new List<DialogueLine>();
+
+        JumpToLine(defaultLine);
+    }
+
+    private void ReadDialogueLine()
+    {
+        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+
         TextController.Instance.SetText(currentLine.dialogueText);
+        AudioController.Instance.PlaySound(currentLine.voiceLine);
+
         ResponseController.Instance.DestroyResponses();
+        ResponseController.Instance.ShowResponses(currentLine.responses);
+    }
 
-        if (isVoiceActingEnabled && currentLine.voiceLine)
-        {
-            AudioController.Instance.PlaySound(currentLine.voiceLine);
-        }
+    public void JumpToLine(DialogueLine dialogueLine)
+    {
+        dialoguePath.Add(dialogueLine);
 
-        if (currentLine.responses.Length > 0)
-        {
-            ResponseController.Instance.ShowResponses(currentLine.responses);
-        }
-
-        if (!isRewinding && currentLine.setFlags.Length > 0)
-        {
-            FlagController.Instance.ToggleFlags(currentLine.setFlags, !isRewinding);
-        }
+        ReadDialogueLine();
+        FlagController.Instance.ToggleFlags(dialogueLine.setFlags, true);
     }
 
     public void StepForward()
     {
+        if (!(dialoguePath.Count > 0)) return;
+        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+
         if (!currentLine.nextLine) return;
-        PlayDialogue(currentLine.nextLine);
+        JumpToLine(currentLine.nextLine);
     }
 
     public void StepBackward()
     {
-        if (!currentLine.previousLine) return;
-        PlayDialogue(currentLine.previousLine, true);
+        if (!(dialoguePath.Count > 1)) return;
+        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+
+        dialoguePath.RemoveAt(dialoguePath.Count - 1);
+    
+        ReadDialogueLine();
+        FlagController.Instance.ToggleFlags(currentLine.setFlags, false);
     }
 
     public void RepeatLine()
     {
-        if (!currentLine) return;
-        PlayDialogue(currentLine);
+        if (!(dialoguePath.Count > 0)) return;
+        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+
+        ReadDialogueLine();
     }
 }

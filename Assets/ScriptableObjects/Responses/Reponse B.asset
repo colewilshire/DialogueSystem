@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
-  m_Name: HelloWorld
+  m_Script: {fileID: 11500000, guid: 243938312ce9eb241b9543a2619ac694, type: 3}
+  m_Name: Reponse B
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
-  dialogueText: Hello, world!
-  voiceLine: {fileID: 0}
-  responses: []
-  nextLine: {fileID: 11400000, guid: 6e8e22f4079dba343aff54cc9fb6410e, type: 2}
+  responseText: Response B
+  nextLine: {fileID: 11400000, guid: ce7bcaffc7f55a641ac48d2f3aebc92a, type: 2}
+  checkFlags: []

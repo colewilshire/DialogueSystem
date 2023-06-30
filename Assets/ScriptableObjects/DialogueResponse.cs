@@ -4,7 +4,6 @@ using UnityEngine;
 public class DialogueResponse : ScriptableObject
 {
     public string responseText;
-    public DialogueLine previousLine;
     public DialogueLine nextLine;
     public string[] checkFlags;
 }

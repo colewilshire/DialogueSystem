@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
-  m_Name: GoodbyeWorld
+  m_Name: Choice
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  dialogueText: Goodbye, world.
+  dialogueText: Make your choice.
   voiceLine: {fileID: 0}
-  responses: []
-  previousLine: {fileID: 11400000, guid: 6e8e22f4079dba343aff54cc9fb6410e, type: 2}
-  nextLine: {fileID: 11400000, guid: 0e8a8f22294fda241a04113de2307144, type: 2}
-  setFlags:
-  - Dog
-  - Cat
+  responses:
+  - {fileID: 11400000, guid: bf4abef64ee537e4796ae76b02bc1a4c, type: 2}
+  - {fileID: 11400000, guid: e80f6f979426b354f98bd4debfe65b0d, type: 2}
+  - {fileID: 11400000, guid: 0da87d1b285e90149aad94909d759eff, type: 2}
+  nextLine: {fileID: 0}
+  setFlags: []
+  checkFlags: []

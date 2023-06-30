@@ -669,8 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdca6c799d27cc14f8500570ab0e6864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultLine: {fileID: 11400000, guid: 0e8a8f22294fda241a04113de2307144, type: 2}
-  isVoiceActingEnabled: 1
+  defaultLine: {fileID: 11400000, guid: 0679e1ca04e375e49a761f04b9e06f90, type: 2}
 --- !u!4 &888371920
 Transform:
   m_ObjectHideFlags: 0

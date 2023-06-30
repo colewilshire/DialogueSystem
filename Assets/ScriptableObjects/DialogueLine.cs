@@ -7,7 +7,7 @@ public class DialogueLine : ScriptableObject
     public string dialogueText;
     public AudioClip voiceLine;
     public DialogueResponse[] responses;
-    public DialogueLine previousLine;
     public DialogueLine nextLine;
     public string[] setFlags;
+    public string[] checkFlags;
 }

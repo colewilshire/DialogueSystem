@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 243938312ce9eb241b9543a2619ac694, type: 3}
-  m_Name: ScrewOff
+  m_Name: Response C
   m_EditorClassIdentifier: 
-  responseText: Screw off.
-  voiceLine: {fileID: 0}
-  previousLine: {fileID: 11400000, guid: 6e8e22f4079dba343aff54cc9fb6410e, type: 2}
-  nextLine: {fileID: 11400000, guid: 528256e3047306c4caca6c0345b89e0a, type: 2}
+  responseText: Response C
+  nextLine: {fileID: 11400000, guid: 093c2cd66a00d594fbb3b3fccddc1099, type: 2}
+  checkFlags: []

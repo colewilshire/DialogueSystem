@@ -14,6 +14,8 @@ public class AudioController : Singleton<AudioController>
 
     public void PlaySound(AudioClip sound)
     {
+        if (!sound) return;
+       
         audioSource.clip = sound;
         audioSource.Play();
     }

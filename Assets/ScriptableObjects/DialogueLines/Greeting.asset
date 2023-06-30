@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243938312ce9eb241b9543a2619ac694, type: 3}
-  m_Name: WhatIsUp
+  m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
+  m_Name: Greeting
   m_EditorClassIdentifier: 
-  responseText: What's up?
+  character: {fileID: 0}
+  dialogueText: Hello!
   voiceLine: {fileID: 0}
-  previousLine: {fileID: 11400000, guid: 6e8e22f4079dba343aff54cc9fb6410e, type: 2}
-  nextLine: {fileID: 11400000, guid: 528256e3047306c4caca6c0345b89e0a, type: 2}
+  responses: []
+  nextLine: {fileID: 11400000, guid: 51da3cffeabc12544b107f7dbd0de100, type: 2}
+  setFlags: []
+  checkFlags: []
