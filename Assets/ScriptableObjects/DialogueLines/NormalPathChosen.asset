@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: NormalPathChosen
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  dialogueText: 
+  dialogueText: So you choose a life of monotony and safety.
   voiceLine: {fileID: 0}
   responses: []
-  nextLine: {fileID: 0}
+  nextLine: {fileID: 11400000, guid: 935afa20b9273c64da5653a176750f92, type: 2}
   setFlags: []
   checkFlags: []
   alternateLine: {fileID: 0}
