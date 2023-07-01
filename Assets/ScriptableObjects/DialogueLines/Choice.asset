@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Choice
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  dialogueText: Make your choice.
+  dialogueText: Would you like to go down the seceret path?
   voiceLine: {fileID: 0}
   responses:
   - {fileID: 11400000, guid: bf4abef64ee537e4796ae76b02bc1a4c, type: 2}
@@ -22,3 +22,4 @@ MonoBehaviour:
   nextLine: {fileID: 0}
   setFlags: []
   checkFlags: []
+  alternateLine: {fileID: 0}

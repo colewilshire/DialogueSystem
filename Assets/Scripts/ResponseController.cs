@@ -11,12 +11,15 @@ public class ResponseController : Singleton<ResponseController>
     {
         foreach (DialogueResponse response in responses)
         {
-            GameObject button = Instantiate(buttonPrefab, transform);
-            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (!(response.checkFlags.Length > 0) || FlagController.Instance.CheckForFlags(response.checkFlags))
+            {
+                GameObject button = Instantiate(buttonPrefab, transform);
+                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
 
-            buttonText.text = response.responseText;
-            activeButtons.Add(button);
-            button.GetComponent<ResponseButton>().SetLineToPlay(response.nextLine);
+                buttonText.text = response.responseText;
+                activeButtons.Add(button);
+                button.GetComponent<ResponseButton>().SetLineToPlay(response.nextLine);
+            }
         }
     }
 

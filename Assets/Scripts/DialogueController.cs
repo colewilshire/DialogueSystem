@@ -31,10 +31,19 @@ public class DialogueController : Singleton<DialogueController>
 
     public void JumpToLine(DialogueLine dialogueLine)
     {
+        if(dialogueLine.checkFlags.Length > 0 && dialogueLine.alternateLine)
+        {
+            if (!(FlagController.Instance.CheckForFlags(dialogueLine.checkFlags)))
+            {
+                JumpToLine(dialogueLine.alternateLine);
+                return;
+            }
+        }
+
         dialoguePath.Add(dialogueLine);
 
-        ReadDialogueLine();
         FlagController.Instance.ToggleFlags(dialogueLine.setFlags, true);
+        ReadDialogueLine();
     }
 
     public void StepForward()
@@ -53,8 +62,8 @@ public class DialogueController : Singleton<DialogueController>
 
         dialoguePath.RemoveAt(dialoguePath.Count - 1);
     
-        ReadDialogueLine();
         FlagController.Instance.ToggleFlags(currentLine.setFlags, false);
+        ReadDialogueLine();
     }
 
     public void RepeatLine()

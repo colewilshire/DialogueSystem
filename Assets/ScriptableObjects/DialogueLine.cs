@@ -10,4 +10,5 @@ public class DialogueLine : ScriptableObject
     public DialogueLine nextLine;
     public string[] setFlags;
     public string[] checkFlags;
+    public DialogueLine alternateLine;
 }

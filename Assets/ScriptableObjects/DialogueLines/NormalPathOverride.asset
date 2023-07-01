@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
-  m_Name: Result B
+  m_Name: NormalPathOverride
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  dialogueText: Result B
+  dialogueText: The path is full of dirt and normalcy.
   voiceLine: {fileID: 0}
   responses: []
   nextLine: {fileID: 11400000, guid: 583c8eb165c7b8b4895e180060dba79e, type: 2}
   setFlags: []
   checkFlags: []
+  alternateLine: {fileID: 0}
