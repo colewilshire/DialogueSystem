@@ -11,7 +11,7 @@ public class ResponseController : Singleton<ResponseController>
     {
         foreach (DialogueResponse response in responses)
         {
-            if (!(response.checkFlags.Length > 0) || FlagController.Instance.CheckForFlags(response.checkFlags))
+            if (!(response.checkFlags.Count > 0) || FlagController.Instance.CheckForFlags(response.checkFlags))
             {
                 GameObject button = Instantiate(buttonPrefab, transform);
                 TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();

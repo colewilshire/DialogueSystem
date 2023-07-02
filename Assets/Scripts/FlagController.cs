@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 public class FlagController : Singleton<FlagController>
 {
-    private Dictionary<string, bool> flags = new Dictionary<string, bool>();
+    public Dictionary<string, bool> Flags { get; private set; } = new Dictionary<string, bool>();
 
-    public bool CheckForFlags(string[] flagNames)
+    public bool CheckForFlags(List<string> flagNames)
     {
         foreach (string flagName in flagNames)
         {
-            if (!flags.ContainsKey(flagName) || !flags[flagName])
+            if (!Flags.ContainsKey(flagName) || !Flags[flagName])
             {
                 return false;
             }
@@ -17,11 +17,18 @@ public class FlagController : Singleton<FlagController>
         return true;
     }
 
-    public void ToggleFlags(string[] flagNames, bool state)
+    public void ToggleFlags(List<string> flagNames, bool state)
     {
         foreach (string flagName in flagNames)
         {
-            flags[flagName] = state;
+            Flags[flagName] = state;
         }
+    }
+
+    public void LoadFlags(List<string> flagNames)
+    {
+        Flags = new Dictionary<string, bool>();
+
+        ToggleFlags(flagNames, true);
     }
 }

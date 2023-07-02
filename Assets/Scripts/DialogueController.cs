@@ -4,23 +4,37 @@ using UnityEngine;
 public class DialogueController : Singleton<DialogueController>
 {
     [SerializeField] private DialogueLine defaultLine;
-    private List<DialogueLine> dialoguePath;
+    public List<DialogueLine> DialoguePath { get; private set; }
 
     private void Start()
     {
         StartDialogue();
     }
 
-    private void StartDialogue()
+    public void StartDialogue()
     {
-        dialoguePath = new List<DialogueLine>();
+        SaveData saveData = SaveController.Instance.Load("quicksave");
+        DialogueLine currentLine = defaultLine;
 
-        JumpToLine(defaultLine);
+        if (saveData)
+        {
+            Debug.Log("Loading game.");
+            DialoguePath = saveData.dialoguePath;
+            currentLine = DialoguePath[DialoguePath.Count - 1];
+            FlagController.Instance.LoadFlags(saveData.activeFlags);
+        }
+        else
+        {
+            Debug.Log("Starting new game.");
+            DialoguePath = new List<DialogueLine>();
+        }
+
+        JumpToLine(currentLine);
     }
 
     private void ReadDialogueLine()
     {
-        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+        DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
         TextController.Instance.SetText(currentLine.dialogueText);
         AudioController.Instance.PlaySound(currentLine.voiceLine);
@@ -31,7 +45,7 @@ public class DialogueController : Singleton<DialogueController>
 
     public void JumpToLine(DialogueLine dialogueLine)
     {
-        if(dialogueLine.checkFlags.Length > 0 && dialogueLine.alternateLine)
+        if(dialogueLine.checkFlags.Count > 0 && dialogueLine.alternateLine)
         {
             if (!(FlagController.Instance.CheckForFlags(dialogueLine.checkFlags)))
             {
@@ -40,7 +54,7 @@ public class DialogueController : Singleton<DialogueController>
             }
         }
 
-        dialoguePath.Add(dialogueLine);
+        DialoguePath.Add(dialogueLine);
 
         FlagController.Instance.ToggleFlags(dialogueLine.setFlags, true);
         ReadDialogueLine();
@@ -48,8 +62,8 @@ public class DialogueController : Singleton<DialogueController>
 
     public void StepForward()
     {
-        if (!(dialoguePath.Count > 0)) return;
-        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+        if (!(DialoguePath.Count > 0)) return;
+        DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
         if (!currentLine.nextLine) return;
         JumpToLine(currentLine.nextLine);
@@ -57,10 +71,10 @@ public class DialogueController : Singleton<DialogueController>
 
     public void StepBackward()
     {
-        if (!(dialoguePath.Count > 1)) return;
-        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+        if (!(DialoguePath.Count > 1)) return;
+        DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
-        dialoguePath.RemoveAt(dialoguePath.Count - 1);
+        DialoguePath.RemoveAt(DialoguePath.Count - 1);
     
         FlagController.Instance.ToggleFlags(currentLine.setFlags, false);
         ReadDialogueLine();
@@ -68,8 +82,8 @@ public class DialogueController : Singleton<DialogueController>
 
     public void RepeatLine()
     {
-        if (!(dialoguePath.Count > 0)) return;
-        DialogueLine currentLine = dialoguePath[dialoguePath.Count - 1];
+        if (!(DialoguePath.Count > 0)) return;
+        DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
         ReadDialogueLine();
     }

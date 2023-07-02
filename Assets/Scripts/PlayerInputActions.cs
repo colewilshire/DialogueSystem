@@ -53,6 +53,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quicksave"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f5c6e6e-8167-4f85-8ed1-47af3e05bcda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quickload"",
+                    ""type"": ""Button"",
+                    ""id"": ""df9647f5-12bb-48a1-acb7-2786a8108067"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,6 +104,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""RepeatLine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42bcc985-8b36-41ae-a275-b2547f066bee"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Quicksave"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6881f8b-aeff-4fd4-bcd2-6f45377e628b"",
+                    ""path"": ""<Keyboard>/f9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Quickload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -133,6 +173,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Dialogue_StepForward = m_Dialogue.FindAction("StepForward", throwIfNotFound: true);
         m_Dialogue_StepBackward = m_Dialogue.FindAction("StepBackward", throwIfNotFound: true);
         m_Dialogue_RepeatLine = m_Dialogue.FindAction("RepeatLine", throwIfNotFound: true);
+        m_Dialogue_Quicksave = m_Dialogue.FindAction("Quicksave", throwIfNotFound: true);
+        m_Dialogue_Quickload = m_Dialogue.FindAction("Quickload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -197,6 +239,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Dialogue_StepForward;
     private readonly InputAction m_Dialogue_StepBackward;
     private readonly InputAction m_Dialogue_RepeatLine;
+    private readonly InputAction m_Dialogue_Quicksave;
+    private readonly InputAction m_Dialogue_Quickload;
     public struct DialogueActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -204,6 +248,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @StepForward => m_Wrapper.m_Dialogue_StepForward;
         public InputAction @StepBackward => m_Wrapper.m_Dialogue_StepBackward;
         public InputAction @RepeatLine => m_Wrapper.m_Dialogue_RepeatLine;
+        public InputAction @Quicksave => m_Wrapper.m_Dialogue_Quicksave;
+        public InputAction @Quickload => m_Wrapper.m_Dialogue_Quickload;
         public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -222,6 +268,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @RepeatLine.started += instance.OnRepeatLine;
             @RepeatLine.performed += instance.OnRepeatLine;
             @RepeatLine.canceled += instance.OnRepeatLine;
+            @Quicksave.started += instance.OnQuicksave;
+            @Quicksave.performed += instance.OnQuicksave;
+            @Quicksave.canceled += instance.OnQuicksave;
+            @Quickload.started += instance.OnQuickload;
+            @Quickload.performed += instance.OnQuickload;
+            @Quickload.canceled += instance.OnQuickload;
         }
 
         private void UnregisterCallbacks(IDialogueActions instance)
@@ -235,6 +287,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @RepeatLine.started -= instance.OnRepeatLine;
             @RepeatLine.performed -= instance.OnRepeatLine;
             @RepeatLine.canceled -= instance.OnRepeatLine;
+            @Quicksave.started -= instance.OnQuicksave;
+            @Quicksave.performed -= instance.OnQuicksave;
+            @Quicksave.canceled -= instance.OnQuicksave;
+            @Quickload.started -= instance.OnQuickload;
+            @Quickload.performed -= instance.OnQuickload;
+            @Quickload.canceled -= instance.OnQuickload;
         }
 
         public void RemoveCallbacks(IDialogueActions instance)
@@ -284,5 +342,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnStepForward(InputAction.CallbackContext context);
         void OnStepBackward(InputAction.CallbackContext context);
         void OnRepeatLine(InputAction.CallbackContext context);
+        void OnQuicksave(InputAction.CallbackContext context);
+        void OnQuickload(InputAction.CallbackContext context);
     }
 }

@@ -8,6 +8,8 @@ public class InputController : Singleton<InputController>
     private InputAction stepForwardAction;
     private InputAction stepBackwardAction;
     private InputAction repeatLineAction;
+    private InputAction quicksaveAction;
+    private InputAction quickloadAction;
     [SerializeField] private Button stepForwardButton;
     [SerializeField] private Button stepBackwardButton;
     [SerializeField] private Button repeatLineButton;
@@ -30,14 +32,20 @@ public class InputController : Singleton<InputController>
         stepForwardAction = playerInputActions.Dialogue.StepForward;
         stepBackwardAction = playerInputActions.Dialogue.StepBackward;
         repeatLineAction = playerInputActions.Dialogue.RepeatLine;
+        quicksaveAction = playerInputActions.Dialogue.Quicksave;
+        quickloadAction = playerInputActions.Dialogue.Quickload;
 
         stepForwardAction.performed += OnStepForward;
         stepBackwardAction.performed += OnStepBackward;
         repeatLineAction.performed += OnRepeatLine;
+        quicksaveAction.performed += OnQuicksave;
+        quickloadAction.performed += OnQuickload;
 
         stepForwardAction.Enable();
         stepBackwardAction.Enable();
         repeatLineAction.Enable();
+        quicksaveAction.Enable();
+        quickloadAction.Enable();
     }
 
     private void DisableInputs()
@@ -45,10 +53,14 @@ public class InputController : Singleton<InputController>
         stepForwardAction.performed -= OnStepForward;
         stepBackwardAction.performed -= OnStepBackward;
         repeatLineAction.performed -= OnRepeatLine;
+        quicksaveAction.performed -= OnQuicksave;
+        quickloadAction.performed -= OnQuickload;
 
         stepForwardAction.Disable();
         stepBackwardAction.Disable();
         repeatLineAction.Disable();
+        quicksaveAction.Disable();
+        quickloadAction.Disable();
     }
 
     private void SetUpButtons()
@@ -100,5 +112,15 @@ public class InputController : Singleton<InputController>
     private void OnRepeatLine(InputAction.CallbackContext context)
     {
         DialogueController.Instance.RepeatLine();
+    }
+
+    private void OnQuicksave(InputAction.CallbackContext context)
+    {
+        SaveController.Instance.Quicksave();
+    }
+
+    private void OnQuickload(InputAction.CallbackContext context)
+    {
+        SaveController.Instance.Quickload();
     }
 }
