@@ -11,27 +11,6 @@ public class DialogueController : Singleton<DialogueController>
         StartDialogue();
     }
 
-    public void StartDialogue()
-    {
-        SaveData saveData = SaveController.Instance.Load("quicksave");
-        DialogueLine currentLine = defaultLine;
-
-        if (saveData)
-        {
-            Debug.Log("Loading game.");
-            DialoguePath = saveData.dialoguePath;
-            currentLine = DialoguePath[DialoguePath.Count - 1];
-            FlagController.Instance.LoadFlags(saveData.activeFlags);
-        }
-        else
-        {
-            Debug.Log("Starting new game.");
-            DialoguePath = new List<DialogueLine>();
-        }
-
-        JumpToLine(currentLine);
-    }
-
     private void ReadDialogueLine()
     {
         DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
@@ -41,6 +20,27 @@ public class DialogueController : Singleton<DialogueController>
 
         ResponseController.Instance.DestroyResponses();
         ResponseController.Instance.ShowResponses(currentLine.responses);
+    }
+
+    public void StartDialogue()
+    {
+        SaveData saveData = SaveController.Instance.Load("quicksave");
+
+        if (saveData)
+        {
+            Debug.Log("Loading game.");
+
+            DialoguePath = saveData.dialoguePath;
+            FlagController.Instance.LoadFlags(saveData.activeFlags);
+            ReadDialogueLine();
+        }
+        else
+        {
+            Debug.Log("Starting new game.");
+
+            DialoguePath = new List<DialogueLine>();
+            JumpToLine(defaultLine);
+        }
     }
 
     public void JumpToLine(DialogueLine dialogueLine)

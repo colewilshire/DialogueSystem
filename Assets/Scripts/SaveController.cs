@@ -41,18 +41,19 @@ public class SaveController : Singleton<SaveController>
 
     public void Quicksave()
     {
-        Debug.Log("Saving");
         Save("quicksave");
     }
 
     public void Autosave()
     {
-        Debug.Log("Saving");
         Save("autosave");
     }
 
     public void Quickload()
     {
+        string savePath = Path.Combine(Application.persistentDataPath, "quicksave" + ".json");
+        if (!(File.Exists(savePath))) return;
+
         DialogueController.Instance.StartDialogue();
     }
 }
