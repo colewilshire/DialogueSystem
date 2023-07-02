@@ -15,6 +15,7 @@ public class DialogueController : Singleton<DialogueController>
     {
         DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
+        BackgroundController.Instance.SetBackground(currentLine.backgroundImage);
         TextController.Instance.SetText(currentLine.dialogueText);
         AudioController.Instance.PlaySound(currentLine.voiceLine);
 

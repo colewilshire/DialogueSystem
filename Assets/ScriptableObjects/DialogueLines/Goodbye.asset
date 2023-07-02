@@ -16,7 +16,8 @@ MonoBehaviour:
   dialogueText: Bye!
   voiceLine: {fileID: 0}
   responses: []
-  nextLine: {fileID: 11400000, guid: 51da3cffeabc12544b107f7dbd0de100, type: 2}
+  nextLine: {fileID: 11400000, guid: 0679e1ca04e375e49a761f04b9e06f90, type: 2}
   setFlags: []
   checkFlags: []
   alternateLine: {fileID: 0}
+  backgroundImage: {fileID: 21300000, guid: 4241a4cdeb2274b4b93cf047a6d5cd43, type: 3}

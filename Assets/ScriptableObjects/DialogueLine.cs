@@ -12,4 +12,5 @@ public class DialogueLine : ScriptableObject
     public List<string> setFlags;
     public List<string> checkFlags;
     public DialogueLine alternateLine;
+    public Sprite backgroundImage;
 }
