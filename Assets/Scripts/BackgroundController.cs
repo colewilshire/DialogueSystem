@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BackgroundController : Singleton<BackgroundController>
 {
-    Image backgroundImage;
+    private Image backgroundImage;
 
     protected override void Awake()
     {

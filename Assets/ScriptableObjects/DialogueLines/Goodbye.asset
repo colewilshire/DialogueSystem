@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
   m_Name: Goodbye
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 11400000, guid: 0ae4bdbc92687314caa49a7fd2f027c6, type: 2}
   dialogueText: Bye!
   voiceLine: {fileID: 0}
   responses: []
