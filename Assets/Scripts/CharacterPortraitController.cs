@@ -1,23 +1,12 @@
-using UnityEngine;
+using System.Collections.Generic;
 
-public class CharacterPortraitController : MonoBehaviour
+public class CharacterPortraitController : Singleton<CharacterPortraitController>
 {
-    [SerializeField] Character characterData;
+    public delegate void OnSceneChangeHandler(List<CharacterInstance> characterInstances);
+    public event OnSceneChangeHandler OnSceneChange;
 
-    private void OnEnable()
+    public void ShowCharacters(List<CharacterInstance> characterInstances)
     {
-        SetMood();
-        PlayEntranceEffect();
-    }
-
-    private void PlayEntranceEffect()
-    {
-        // Read in arbitrarily long list of effects (slide stage right, shake screen, etc.)
-
-    }
-
-    private void SetMood()
-    {
-        // Change portrait based on mood enum
+        OnSceneChange?.Invoke(characterInstances);
     }
 }

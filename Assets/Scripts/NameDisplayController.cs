@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 
 public class NameDisplayController : Singleton<NameDisplayController>
@@ -11,11 +12,11 @@ public class NameDisplayController : Singleton<NameDisplayController>
         textBox = GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetDisplayName(Character character)
+    public void SetDisplayName(List<CharacterInstance> characterInstances)
     {
-        if (character)
+        if (characterInstances.Count > 0 && characterInstances[0])
         {
-            textBox.text = character.characterName;
+            textBox.text = characterInstances[0].character.name;
         }
         else
         {

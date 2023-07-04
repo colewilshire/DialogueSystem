@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SaveController : Singleton<SaveController>
 {
+    public string quicksaveName = "quicksave";
+    public string autosaveName = "autosave";
     public SaveData saveData { get; private set; }
 
     protected override void Awake()
@@ -18,7 +20,7 @@ public class SaveController : Singleton<SaveController>
         saveData.dialoguePath = DialogueController.Instance.DialoguePath;
         saveData.activeFlags = new List<string>(FlagController.Instance.Flags.Keys);
 
-        string savePath = Path.Combine(Application.persistentDataPath, saveName + ".json");
+        string savePath = Path.Combine(Application.persistentDataPath, saveName + ".sav");
         string json = JsonUtility.ToJson(saveData);
 
         File.WriteAllText(savePath, json);
@@ -26,7 +28,7 @@ public class SaveController : Singleton<SaveController>
 
     public SaveData Load(string saveName)
     {
-        string savePath = Path.Combine(Application.persistentDataPath, saveName + ".json");
+        string savePath = Path.Combine(Application.persistentDataPath, saveName + ".sav");
 
         if (File.Exists(savePath))
         {
@@ -41,17 +43,17 @@ public class SaveController : Singleton<SaveController>
 
     public void Quicksave()
     {
-        Save("quicksave");
+        Save(quicksaveName);
     }
 
     public void Autosave()
     {
-        Save("autosave");
+        Save(autosaveName);
     }
 
     public void Quickload()
     {
-        string savePath = Path.Combine(Application.persistentDataPath, "quicksave" + ".json");
+        string savePath = Path.Combine(Application.persistentDataPath, quicksaveName + ".sav");
         if (!(File.Exists(savePath))) return;
 
         DialogueController.Instance.StartDialogue();

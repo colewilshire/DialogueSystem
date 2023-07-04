@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e42aab06d6556c4292403a5dbc29239, type: 3}
   m_Name: NormalPathChosen
   m_EditorClassIdentifier: 
-  character: {fileID: 11400000, guid: 0ae4bdbc92687314caa49a7fd2f027c6, type: 2}
   dialogueText: So you choose a life of monotony and safety.
   voiceLine: {fileID: 0}
   responses: []
@@ -21,3 +20,5 @@ MonoBehaviour:
   checkFlags: []
   alternateLine: {fileID: 0}
   backgroundImage: {fileID: 21300000, guid: 4241a4cdeb2274b4b93cf047a6d5cd43, type: 3}
+  characterInstances:
+  - {fileID: 11400000, guid: 16284a0fa8ae5a846b46ecfd586c7479, type: 2}
