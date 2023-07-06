@@ -18,14 +18,7 @@ public class TextController : Singleton<TextController>
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void SetText(string text)
-    {
-        StopAllCoroutines();
-        currentText = text;
-        StartCoroutine(DisplayText());
-    }
-
-    IEnumerator DisplayText()
+    private IEnumerator DisplayText()
     {
         if (textDelay > 0)
         {
@@ -46,5 +39,12 @@ public class TextController : Singleton<TextController>
         {
             textBox.text = currentText;
         }
+    }
+
+    public void SetText(string text)
+    {
+        StopAllCoroutines();
+        currentText = text;
+        StartCoroutine(DisplayText());
     }
 }

@@ -19,6 +19,6 @@ MonoBehaviour:
   setFlags: []
   checkFlags: []
   alternateLine: {fileID: 0}
-  backgroundImage: {fileID: 21300000, guid: 4241a4cdeb2274b4b93cf047a6d5cd43, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 778daba761686374ea2abb16b4397f8c, type: 3}
   characterInstances:
   - {fileID: 11400000, guid: 16284a0fa8ae5a846b46ecfd586c7479, type: 2}

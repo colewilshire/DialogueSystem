@@ -16,7 +16,7 @@ public class DialogueController : Singleton<DialogueController>
         DialogueLine currentLine = DialoguePath[DialoguePath.Count - 1];
 
         BackgroundController.Instance.SetBackground(currentLine.backgroundImage);
-        CharacterPortraitController.Instance.ShowCharacters(currentLine.characterInstances);
+        TroupeController.Instance.ShowCharacters(currentLine.characterInstances);
 
         NameDisplayController.Instance.SetDisplayName(currentLine.characterInstances);
         TextController.Instance.SetText(currentLine.dialogueText);
